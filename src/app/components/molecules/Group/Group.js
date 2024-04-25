@@ -13,7 +13,9 @@ export function Group(context) {
   const router = useRouter();
 
   const data = context.data.groups;
-
+  console.log(context);
+  console.log(context.data);
+  console.log(context.data.groups);
   const options = [];
   data.forEach((name) => {
     options.push(
