@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "@/app/styles/Contents.module.css";
 import useReadGroups from "@/app/utils/useReadGroups";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+// import Link from "next/link";
 
 export function Group(context) {
   const ReadGroups = useReadGroups();
@@ -82,7 +82,7 @@ export function Group(context) {
     );
     const jsonData = await response.json();
     alert(jsonData.message);
-    return await location.reload();
+    return router.refresh();
   };
 
   return (
