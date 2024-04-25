@@ -58,8 +58,8 @@ export function Group(context) {
           const Group = await res.json();
           // revalidate: 60 // 1分ごとにデータを更新
           alert(Group.message);
-
-          return router.refresh({ shallow: true });
+          router.refresh({ shallow: true });
+          return location.reload();
         } else {
           return null;
         }
