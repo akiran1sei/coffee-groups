@@ -51,7 +51,7 @@ export function Group(context) {
           const res = await fetch(
             `${process.env.NEXT_PUBLIC_URL}/api/group/chioce`,
             {
-              // method: "GET",
+              method: "GET",
               cache: "no-store",
             }
           );
