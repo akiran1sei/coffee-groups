@@ -7,7 +7,7 @@ const GroupPage = async () => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/group/chioce`,
     {
-      // method: "GET",
+      method: "GET",
       cache: "no-store",
     }
   );
