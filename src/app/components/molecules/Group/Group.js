@@ -17,11 +17,19 @@ export function Group(context) {
   console.log(context.data);
   console.log(context.data.groups);
   const options = [];
+  const groupName = [];
   data.forEach((name) => {
     options.push(
       <option key={name._id} value={name._id}>
         {name.groupname}
       </option>
+    );
+  });
+  data.forEach((name) => {
+    groupName.push(
+      <p key={name._id} value={name._id}>
+        {name.groupname}
+      </p>
     );
   });
 
@@ -150,6 +158,7 @@ export function Group(context) {
                   </div>
                 </form>
               </li>
+              <li className={styles.group_form_item}>{groupName}</li>
             </ul>
             {/* <button className={styles.group_next_btn}>
               <Link href={"/pages/create"} scroll={false} passHref>
