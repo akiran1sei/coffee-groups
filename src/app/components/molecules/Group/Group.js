@@ -57,7 +57,7 @@ export function Group(context) {
           // revalidate: 60 // 1分ごとにデータを更新
           alert(Group.message);
 
-          return router.refresh();
+          return router.refresh({ shallow: true });
         } else {
           return null;
         }
@@ -82,7 +82,7 @@ export function Group(context) {
     );
     const jsonData = await response.json();
     alert(jsonData.message);
-    return router.refresh();
+    return router.refresh({ shallow: true });
   };
 
   return (

@@ -1,9 +1,15 @@
 // import Head from "next/head";
-
+"use client";
 import styles from "./styles/Contents.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 const Home = () => {
+  const router = useRouter();
+  const handleStartButton = () => {
+    router.refresh();
+    return router.replace("/pages/group");
+  };
   return (
     <div className={styles.home}>
       <div className={styles.home_bg}>
@@ -23,11 +29,12 @@ const Home = () => {
           <span>Tasting Note</span>
         </h1>
         <ul className={styles.home_nav_list}>
-          <li className={styles.home_nav_item}>
+          <li className={styles.home_nav_item} onClick={handleStartButton}>
             <button type="button" className={styles.home_start_btn}>
-              <Link href={"/pages/group"} scroll={false} passHref>
+              {/* <Link href={"/pages/group"} scroll={false} passHref>
                 START
-              </Link>
+              </Link> */}
+              START
             </button>
           </li>
         </ul>
