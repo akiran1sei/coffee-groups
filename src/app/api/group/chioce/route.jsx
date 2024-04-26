@@ -3,10 +3,9 @@ import { GroupModel } from "@/app/utils/schemaModels";
 import { NextResponse } from "next/server";
 
 export async function GET() {
+  await connectDB();
+  const groups = await GroupModel.find({});
   try {
-    await connectDB();
-    const groups = await GroupModel.find({});
-    console.log(groups);
     return NextResponse.json({
       message: "アクセス成功",
       groups,
