@@ -61,7 +61,7 @@ export function Group(context) {
             {
               method: "GET",
               cache: "no-store",
-              header: { "Cache-control": "no-store" },
+              headers: { "Cache-control": "no-store" },
             }
           );
           const Group = await res.json();
@@ -93,7 +93,8 @@ export function Group(context) {
     );
     const jsonData = await response.json();
     alert(jsonData.message);
-    return router.refresh({ shallow: true });
+    router.refresh({ shallow: true });
+    return location.reload();
   };
 
   return (
