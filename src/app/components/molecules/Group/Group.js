@@ -13,9 +13,7 @@ export function Group(context) {
   const router = useRouter();
 
   const data = context.data.groups;
-  console.log(context);
-  console.log(context.data);
-  console.log(context.data.groups);
+
   const options = [];
   const groupName = [];
   data.forEach((name) => {
@@ -66,8 +64,8 @@ export function Group(context) {
           );
           const Group = await res.json();
           // revalidate: 60 // 1分ごとにデータを更新
-          alert(Group.message);
           router.refresh({ shallow: true });
+          alert(Group.message);
           return location.reload();
         } else {
           return null;
@@ -88,12 +86,13 @@ export function Group(context) {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          "Cache-control": "no-store",
         },
       }
     );
     const jsonData = await response.json();
-    alert(jsonData.message);
     router.refresh({ shallow: true });
+    alert(jsonData.message);
     return location.reload();
   };
 
