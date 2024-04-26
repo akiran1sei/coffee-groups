@@ -61,6 +61,7 @@ export function Group(context) {
             {
               method: "GET",
               cache: "no-store",
+              header: { "Cache-control": "no-store" },
             }
           );
           const Group = await res.json();

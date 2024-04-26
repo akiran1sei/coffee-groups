@@ -6,7 +6,7 @@ export async function GET() {
   try {
     await connectDB();
     const groups = await GroupModel.find({});
-
+    console.log(groups);
     return NextResponse.json({
       message: "アクセス成功",
       groups,
