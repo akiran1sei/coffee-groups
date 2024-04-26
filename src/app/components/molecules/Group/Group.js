@@ -119,11 +119,11 @@ export function Group(context) {
               <li className={styles.group_form_item}>
                 <form onSubmit={handleCreateSubmit}>
                   <h2 className={styles.group_form_title}>
-                    <label htmlFor="group-delete">Group Crate</label>
+                    <label htmlFor="group-create">Group Crate</label>
                   </h2>
                   <input
-                    name="group_create"
-                    id="group_create"
+                    name="group-create"
+                    id="group-create"
                     type="text"
                     value={groupCreate}
                     onChange={(e) => setGroupCreate(e.target.value)}
