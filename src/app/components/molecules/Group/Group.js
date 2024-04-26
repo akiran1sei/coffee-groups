@@ -161,11 +161,6 @@ export function Group(context) {
               </li>
               <li className={styles.group_form_item}>{groupName}</li>
             </ul>
-            {/* <button className={styles.group_next_btn}>
-              <Link href={"/pages/create"} scroll={false} passHref>
-               
-              </Link>
-            </button> */}
           </div>
         </div>
       </div>
