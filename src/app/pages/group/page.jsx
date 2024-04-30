@@ -1,6 +1,8 @@
+// app/pages/group/page.jsx
 import { Group } from "@/app/components/molecules/Group/Group";
 import Head from "next/head";
 import dotenv from "dotenv";
+import upDate from "@/app/utils/upDate";
 
 const GroupPage = async () => {
   dotenv.config();
@@ -12,7 +14,8 @@ const GroupPage = async () => {
     }
   );
   const allGroup = await response.json();
-
+  const upData = upDate(allGroup);
+  console.log(upData);
   return (
     <>
       <Head>
@@ -23,7 +26,7 @@ const GroupPage = async () => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Group data={allGroup} />
+      <Group data={upData} />
     </>
   );
 };
