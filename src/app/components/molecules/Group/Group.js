@@ -4,7 +4,7 @@ import styles from "@/app/styles/Contents.module.css";
 import useReadGroups from "@/app/utils/useReadGroups";
 import { useRouter } from "next/navigation";
 // import Link from "next/link";
-import { revalidatePath } from "next/cache";
+
 export function Group(context) {
   const ReadGroups = useReadGroups();
   const [groupCreate, setGroupCreate] = useState("");
@@ -63,7 +63,7 @@ export function Group(context) {
             }
           );
           const Group = await res.json();
-          revalidatePath("/", "layout");
+
           router.refresh({ shallow: true });
           alert(Group.message);
           return location.reload();
@@ -91,7 +91,7 @@ export function Group(context) {
       }
     );
     const jsonData = await response.json();
-    revalidatePath("/", "layout");
+
     router.refresh({ shallow: true });
     alert(jsonData.message);
     return location.reload();
