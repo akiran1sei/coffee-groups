@@ -14,8 +14,8 @@ const GroupPage = async () => {
     }
   );
   const allGroup = await response.json();
-  const upData = upDate(allGroup);
-  console.log(upData);
+  const upData = await upDate(allGroup);
+  console.log("upData:", upData);
   return (
     <>
       <Head>

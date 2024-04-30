@@ -11,7 +11,7 @@ export function Group(context) {
   const [groupChoice, setGroupChoice] = useState(ReadGroups);
   const [error, setError] = useState("");
   const router = useRouter();
-
+  // console.log("data", context.data.groups);
   const data = context.data.groups;
 
   const options = [];
