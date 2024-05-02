@@ -2,20 +2,12 @@
 import { Group } from "@/app/components/molecules/Group/Group";
 import Head from "next/head";
 import dotenv from "dotenv";
-import upDate from "@/app/utils/upDate";
+import { getAllGroups } from "@/app/api/data/route";
 
 const GroupPage = async () => {
   dotenv.config();
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/group/chioce`,
-    {
-      method: "GET",
-      cache: "no-store",
-    }
-  );
-  const allGroup = await response.json();
-  const upData = await upDate(allGroup);
-  console.log("upData:", upData);
+  const Groups = await getAllGroups();
+
   return (
     <>
       <Head>
@@ -26,7 +18,7 @@ const GroupPage = async () => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Group data={upData} />
+      <Group data={Groups} />
     </>
   );
 };

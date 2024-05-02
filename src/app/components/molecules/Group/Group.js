@@ -1,32 +1,34 @@
 "use client";
 import { useState } from "react";
 import styles from "@/app/styles/Contents.module.css";
-import useReadGroups from "@/app/utils/useReadGroups";
+
 import { useRouter } from "next/navigation";
+import { addGroup } from "@/app/api/data/route";
+import { deleteGroup } from "@/app/api/data/route";
 // import Link from "next/link";
 
 export function Group(context) {
-  const ReadGroups = useReadGroups();
+  const data = context.data;
+  console.log(data);
+
   const [groupCreate, setGroupCreate] = useState("");
-  const [groupChoice, setGroupChoice] = useState(ReadGroups);
+  const [groupChoice, setGroupChoice] = useState(data);
   const [error, setError] = useState("");
   const router = useRouter();
-  // console.log("data", context.data.groups);
-  const data = context.data.groups;
 
   const options = [];
   const groupName = [];
-  data.forEach((name) => {
+  data.forEach((DataName) => {
     options.push(
-      <option key={name._id} value={name._id}>
-        {name.groupname}
+      <option key={DataName.id} value={DataName.id}>
+        {DataName.groupname}
       </option>
     );
   });
-  data.forEach((name) => {
+  data.forEach((DataName) => {
     groupName.push(
-      <p key={name._id} value={name._id}>
-        {name.groupname}
+      <p key={DataName.id} value={DataName.id}>
+        {DataName.groupname}
       </p>
     );
   });
@@ -38,63 +40,20 @@ export function Group(context) {
         return setError("空欄です、記入してください。");
       } else {
         setError(null);
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/group/create`,
-          {
-            // cache: "no-store",
-            method: "POST",
-            body: JSON.stringify({ groupname: groupCreate }),
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const jsonData = await response.json();
-        alert(jsonData.message);
-
-        if (jsonData.message === "グループ作成成功") {
-          const res = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/api/group/chioce`,
-            {
-              method: "GET",
-              cache: "no-store",
-              headers: { "Cache-control": "no-store" },
-            }
-          );
-          const Group = await res.json();
-
-          router.refresh({ shallow: true });
-          alert(Group.message);
-          return location.reload();
-        } else {
-          return null;
-        }
+        await addGroup({ groupname: groupCreate });
+        setGroupCreate("");
+        router.refresh();
       }
     } catch (error) {
       return alert("グループ作成失敗");
     }
   };
+
   const handleDeleteSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/group/delete/${groupChoice}`,
-      {
-        method: "DELETE",
-        body: JSON.stringify({ groupname: groupChoice }),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Cache-control": "no-store",
-        },
-      }
-    );
-    const jsonData = await response.json();
-
-    router.refresh({ shallow: true });
-    alert(jsonData.message);
-    return location.reload();
+    await deleteGroup(groupChoice);
+    router.refresh();
   };
 
   return (
@@ -150,7 +109,7 @@ export function Group(context) {
                     <select
                       name="group-delete"
                       id="group-delete"
-                      value={groupChoice}
+                      value={groupChoice.id}
                       onChange={(e) => setGroupChoice(e.target.value)}
                     >
                       <option></option>
