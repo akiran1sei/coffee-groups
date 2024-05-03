@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "json-server": "json-server --watch src/data/groups.json --port 3001"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
