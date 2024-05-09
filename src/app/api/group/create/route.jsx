@@ -8,7 +8,7 @@ export async function POST(request) {
     const body = await request.json();
 
     const { groupname } = body;
-
+    console.log("groupname:", groupname);
     // グループ名のバリデーション
     if (!groupname || groupname.trim().length === 0) {
       return NextResponse.json({
@@ -17,7 +17,7 @@ export async function POST(request) {
       });
     }
 
-    const existingGroup = await GroupModel.findOne({ groupname });
+    const existingGroup = await GroupModel.findOne({ groupname: groupname });
 
     // グループ名が重複していないことを確認
     if (existingGroup) {
@@ -27,7 +27,7 @@ export async function POST(request) {
       });
     }
 
-    const newGroup = new GroupModel({ groupname });
+    const newGroup = new GroupModel({ groupname: groupname });
     await newGroup.save();
 
     return NextResponse.json({

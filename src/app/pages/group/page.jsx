@@ -2,11 +2,17 @@
 import { Group } from "@/app/components/molecules/Group/Group";
 import Head from "next/head";
 import dotenv from "dotenv";
-import { getAllGroups } from "@/app/api/data/route";
 
 const GroupPage = async () => {
   dotenv.config();
-  const Groups = await getAllGroups();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/group/chioce`,
+    {
+      method: "GET",
+      cache: "no-store",
+    }
+  );
+  const Groups = await response.json();
 
   return (
     <>
